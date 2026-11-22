@@ -140,6 +140,29 @@ function dealStoreKey(name = '') {
   return '';
 }
 
+// Os dados de preço vêm da CheapShark, mas os botões levam às lojas oficiais.
+function officialStoreUrl(deal) {
+  const title = String(deal.title || '').trim();
+  const query = encodeURIComponent(title);
+  const store = dealStoreKey(deal.storeName);
+
+  if (store === 'steam') {
+    // Quando a API fornece o App ID da Steam, abre a página exata do jogo.
+    const appId = String(deal.steamAppID || '').trim();
+    if (/^\d+$/.test(appId)) {
+      return `https://store.steampowered.com/app/${appId}/`;
+    }
+    return `https://store.steampowered.com/search/?term=${query}`;
+  }
+
+  if (store === 'epic') {
+    // A Epic não fornece um slug confiável nesse resultado; usa a busca oficial.
+    return `https://store.epicgames.com/pt-BR/browse?q=${query}`;
+  }
+
+  return '#';
+}
+
 async function loadDeals() {
   dealsRefresh.disabled = true;
   dealsStatus.className = 'status';
@@ -196,7 +219,7 @@ function renderDeals() {
     const price = Number(deal.salePrice || 0);
     const normal = Number(deal.normalPrice || 0);
     const savings = Math.round(Number(deal.savings || 0));
-    const link = `https://www.cheapshark.com/redirect?dealID=${encodeURIComponent(deal.dealID || '')}`;
+    const link = officialStoreUrl(deal);
     const card = document.createElement('article');
     card.className = 'game-card';
     card.innerHTML = `
@@ -204,7 +227,7 @@ function renderDeals() {
       <div class="game-content"><h3 title="${title}">${title}</h3>
       <div class="deal-price"><strong>${price.toLocaleString('en-US',{style:'currency',currency:'USD'})}</strong><del>${normal.toLocaleString('en-US',{style:'currency',currency:'USD'})}</del><span class="discount-pill">-${savings}%</span></div>
       <div class="deal-note">Preço informado em USD • pode variar por região</div>
-      <div class="game-bottom" style="margin-top:14px"><span class="source-label">${store}</span><a class="details-link" href="${link}" target="_blank" rel="noopener noreferrer">VER OFERTA ↗</a></div></div>`;
+      <div class="game-bottom" style="margin-top:14px"><span class="source-label">${store}</span><a class="details-link" href="${link}" target="_blank" rel="noopener noreferrer">ABRIR NA LOJA OFICIAL ↗</a></div></div>`;
     dealsGrid.appendChild(card);
   }
 }
