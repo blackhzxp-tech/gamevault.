@@ -1,0 +1,8 @@
+{
+  "name": "gamevault",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Catálogo de jogos gratuitos e promoções de PC",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

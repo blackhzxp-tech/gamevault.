@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="Descubra jogos gratuitos para PC e ofertas por tempo limitado.">
+  <title>GameVault — Jogos grátis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="GameVault início">
+      <span class="brand-mark">G</span><span>GAME<span class="brand-accent">VAULT</span></span>
+    </a>
+    <nav><button class="nav-link active" data-view="catalogo" type="button">Catálogo</button><button class="nav-link" data-view="promocoes" type="button">Promoções</button><a class="nav-link" href="#sobre">Sobre</a></nav>
+    <a class="top-cta" href="#catalogo" id="top-cta">Ver jogos <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> CAÇADOR DE JOGOS GRÁTIS</div>
+        <h1>Seu próximo jogo.<br><span>Sem pagar nada.</span></h1>
+        <p>Descubra jogos grátis para PC: gratuitos para sempre, independentes e ofertas por tempo limitado. Um catálogo, várias fontes, zero complicação.</p>
+        <a class="primary-button" href="#catalogo">Explorar jogos <span>↓</span></a>
+        <div class="hero-meta"><span>✦ Ofertas atualizadas</span><span>✦ Links para fontes oficiais</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="hero-console"><div class="console-screen"><span>GV</span><small>DISCOVER<br>YOUR NEXT GAME</small></div><div class="console-light"></div></div>
+        <div class="floating-tag tag-top">FREE TO PLAY</div><div class="floating-tag tag-bottom">PC GAMING ✦</div>
+      </div>
+    </section>
+
+    <section class="stats-row">
+      <div><strong id="game-count">—</strong><span>jogos encontrados</span></div>
+      <div><strong>100%</strong><span>gratuito para explorar</span></div>
+      <div><strong>PC</strong><span>foco inicial</span></div>
+    </section>
+
+    <section class="catalog-section" id="catalogo" data-panel="catalogo">
+      <div class="section-heading">
+        <div><div class="eyebrow">A BIBLIOTECA</div><h2>Jogos em destaque<span>.</span></h2><p>Jogos grátis para sempre, indies e ofertas temporárias.</p></div>
+        <button class="refresh-button" id="refresh-button" type="button"><span>↻</span> Atualizar</button>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Buscar jogo..." autocomplete="off"></label>
+        <select id="platform-filter" aria-label="Filtrar por plataforma">
+          <option value="all">Todas as plataformas</option>
+          <option value="steam">Steam</option><option value="epic-games-store">Epic Games</option>
+          <option value="gog">GOG</option><option value="itchio">itch.io</option>
+        </select>
+        <select id="category-filter" aria-label="Filtrar por tipo de gratuidade">
+          <option value="all">Todos os tipos</option><option value="permanent">Grátis para sempre</option><option value="limited">Tempo limitado</option><option value="indie">Independentes</option>
+        </select>
+        <select id="sort-filter" aria-label="Ordenar jogos">
+          <option value="recent">Mais recentes</option><option value="popular">Mais populares</option><option value="az">Ordem A–Z</option>
+        </select>
+      </div>
+      <div id="status" class="status"><span class="loader"></span> Buscando jogos gratuitos...</div>
+      <div id="games-grid" class="games-grid" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden><div>⌕</div><h3>Nenhum jogo encontrado</h3><p>Tente outro termo ou altere os filtros.</p></div>
+      <p class="source-credit">Fontes: <a href="https://www.freetogame.com/" target="_blank" rel="noopener noreferrer">FreeToGame</a>, <a href="https://itch.io/games/price-free" target="_blank" rel="noopener noreferrer">itch.io</a> e <a href="https://www.gamerpower.com/" target="_blank" rel="noopener noreferrer">GamerPower</a>. Acesse sempre a página oficial para confirmar preço e condições.</p>
+    </section>
+
+    <section class="catalog-section deals-section" id="promocoes" data-panel="promocoes" hidden>
+      <div class="section-heading">
+        <div><div class="eyebrow">OFERTAS DAS LOJAS</div><h2>Promoções<span>.</span></h2><p>Descontos de jogos para PC na Steam e na Epic Games Store.</p></div>
+        <button class="refresh-button" id="deals-refresh" type="button"><span>↻</span> Buscar ofertas</button>
+      </div>
+      <div class="toolbar deals-toolbar">
+        <label class="search-box"><span>⌕</span><input id="deals-search" type="search" placeholder="Buscar promoção..." autocomplete="off"></label>
+        <select id="deals-store" aria-label="Filtrar loja"><option value="all">Steam e Epic Games</option><option value="steam">Steam</option><option value="epic">Epic Games</option></select>
+        <select id="deals-sort" aria-label="Ordenar promoções"><option value="savings">Maior desconto</option><option value="price">Menor preço</option><option value="recent">Atualizadas recentemente</option></select>
+      </div>
+      <div id="deals-status" class="status">Abra esta aba para buscar as ofertas atuais.</div>
+      <div id="deals-grid" class="games-grid" aria-live="polite"></div>
+      <div id="deals-empty" class="empty-state" hidden><div>％</div><h3>Nenhuma promoção encontrada</h3><p>Tente outro filtro ou volte mais tarde.</p></div>
+      <p class="source-credit">Preços e descontos fornecidos pela <a href="https://www.cheapshark.com/" target="_blank" rel="noopener noreferrer">CheapShark</a>. Os valores são apresentados em USD e os links de ofertas passam pelo redirecionador da CheapShark. Confirme o preço final na loja antes de comprar.</p>
+    </section>
+
+    <section class="about-section" id="sobre">
+      <div class="about-icon">✦</div><div><div class="eyebrow">SOBRE O GAMEVAULT</div><h2>Menos procura.<br>Mais tempo jogando.</h2><p>Reunimos jogos gratuitos permanentes, projetos independentes e ofertas temporárias em um só lugar. O GameVault é um projeto independente e não é afiliado às lojas exibidas. Resgates e downloads são concluídos nas plataformas ou páginas indicadas por cada oferta.</p></div>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">G</span><span>GAME<span class="brand-accent">VAULT</span></span></a><span>Projeto independente • 2026</span><a href="https://www.gamerpower.com/" target="_blank" rel="noopener noreferrer">Fontes: FreeToGame • itch.io • GamerPower • CheapShark</a></footer>
+  <script src="app.js"></script>
+</body>
+</html>
